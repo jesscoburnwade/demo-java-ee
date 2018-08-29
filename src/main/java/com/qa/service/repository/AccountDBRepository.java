@@ -37,41 +37,29 @@ public class AccountDBRepository implements AccountRepository {
 	public String createAccount(String account) {
 		Accounts anAccount = util.getObjectForJSON(account, Accounts.class);
 		manager.persist(anAccount);
-		return "{\"message\": \"account has been sucessfully added\"}";
+		return account;
 	}
 
 	@Override
 	@Transactional(REQUIRED)
 	public String updateAccount(Long id, String accountToUpdate) {
 		Accounts updatedAccount = util.getObjectForJSON(accountToUpdate, Accounts.class);
-		Accounts accountFromDB = findAccount(id);
+		Accounts accountFromDB = manager.find(Accounts.class, id);
 		if (accountToUpdate != null) {
 			accountFromDB = updatedAccount;
 			manager.merge(accountFromDB);
 		}
-		return "{\"message\": \"account sucessfully updated\"}";
+		return accountToUpdate;
 	}
 
 	@Override
 	@Transactional(REQUIRED)
 	public String deleteAccount(Long id) {
-		Accounts accountInDB = findAccount(id);
+		Accounts accountInDB = manager.find(Accounts.class, id);
 		if (accountInDB != null) {
 			manager.remove(accountInDB);
 		}
-		return "{\"message\": \"account sucessfully deleted\"}";
-	}
-
-	private Accounts findAccount(Long id) {
-		return manager.find(Accounts.class, id);
-	}
-
-	public void setManager(EntityManager manager) {
-		this.manager = manager;
-	}
-
-	public void setUtil(JSONUtil util) {
-		this.util = util;
+		return null;	
 	}
 
 }
