@@ -17,9 +17,8 @@ public class Accounts {
 	private String surname;
 	@Column(name = "Account_Number")
 	private String accountNumber;
-	public Long getId() {
-		return id;
-	}
+	
+
 	
 	public Accounts() {}
 	
@@ -27,6 +26,10 @@ public class Accounts {
 		this.firstName = firstName;
 		this.surname = surname;
 		this.accountNumber = accountNumber;
+	}
+	
+	public Long getId() {
+		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
