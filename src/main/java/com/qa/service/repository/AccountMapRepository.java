@@ -1,6 +1,5 @@
 package com.qa.service.repository;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
